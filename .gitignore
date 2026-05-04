@@ -1,0 +1,52 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+.venv/
+venv/
+env/
+ENV/
+
+# Packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Test and coverage
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# Type checking and linting
+.mypy_cache/
+.ruff_cache/
+.pyright/
+
+# Local configuration
+.env
+.env.*
+!.env.example
+
+# Generated media
+output/
+outputs/
+*.mp3
+*.mp4
+*.m4a
+*.wav
+*.aac
+*.flac
+*.srt
+*.vtt
+
+# Keep repository asset placeholders trackable
+!assets/background/.gitkeep
+!assets/bgm/.gitkeep
+
+# macOS and editors
+.DS_Store
+.idea/
+.vscode/
