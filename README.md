@@ -37,16 +37,35 @@ Later:
 - RAG-style pronunciation lookup for larger correction sets.
 - YouTube-ready metadata, captions, and publishing assets.
 
-## Planned CLI
+## CLI Usage
 
-The first implementation milestone is a Python CLI with:
+`tts-pipeline` exposes a Python CLI command. The following subcommands are available:
 
-- `text-to-audio`
-- `mix-background-music` with `mix-bgm` as a short alias
-- `audio-to-video`
-- `text-to-video`
+- `text-to-audio` (planned)
+- `mix-background-music` / `mix-bgm` (planned)
+- `audio-to-video` (implemented): Render an audio file or directory of audio files as an MP4 video.
+- `text-to-video` (planned)
 
-Current behavior: these commands return a clear “planned but not implemented yet” message.
+### audio-to-video Command
+
+The `audio-to-video` command renders audio (e.g. `.m4a` or `.mp3`) to a `.mp4` video with a static background image:
+
+```bash
+# Render a single file
+tts-pipeline audio-to-video -a path/to/audio.m4a -i path/to/background.jpg -o path/to/output.mp4
+
+# Batch convert a folder of audio files
+tts-pipeline audio-to-video -a path/to/audio_dir -o path/to/output_dir
+```
+
+#### Arguments
+- `-a`, `--audio`: Input audio file OR directory for batch mode (required).
+- `-i`, `--image`: Custom background image (defaults to `assets/background/background.jpg` or `assets/background/background.png`).
+- `-o`, `--output`: Output MP4 path or output directory for batch mode (defaults to replacing audio file extension with `.mp4`).
+- `-r`, `--resolution`: Output video resolution (default: `1920x1080`).
+- `--bitrate`: Audio bitrate (default: `192k`).
+- `--no-meta`: Skip embedding default metadata.
+
 
 ## Repository Layout
 
@@ -118,9 +137,9 @@ pytest
 
 ## Troubleshooting
 
-- `tts-pipeline <command>` says the command is not implemented: expected in the current pre-alpha scaffold.
-- `ffmpeg: command not found`: install FFmpeg before using future audio/video rendering commands.
-- `assets/background/background.jpg` is missing: add your own background image before using future video rendering commands.
+- `tts-pipeline <command>` says the command is not implemented: expected for planned commands in this pre-alpha scaffold.
+- `ffmpeg: command not found`: install FFmpeg before using video rendering commands.
+- `assets/background/background.jpg` or `background.png` is missing: add your own background image in `assets/background/` or specify one using `--image`.
 - TTS provider credentials are missing: provider setup will be documented when the first provider lands.
 
 When opening an issue, include your OS, Python version, command, full error output, and whether you installed with `pip install -e ".[dev]"`.
